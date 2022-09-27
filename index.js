@@ -202,7 +202,7 @@ for (let i = 0; i < n; i++) {
 implicitSchemeDeviation /= n;
 implicitSchemeDeviation *= 100;
 implicitSchemeDeviation = implicitSchemeDeviation.toFixed(1);
-console.log('Явная схема:', implicitSchemeDeviation);
+console.log('Неявная схема:', implicitSchemeDeviation);
 
 // погрешность схемы весов
 for (let i = 0; i < n; i++) {
@@ -211,4 +211,4 @@ for (let i = 0; i < n; i++) {
 weightsSchemeDeviation /= n;
 weightsSchemeDeviation *= 100;
 weightsSchemeDeviation = weightsSchemeDeviation.toFixed(1);
-console.log('Явная схема:', weightsSchemeDeviation);
+console.log('Схема весов:', weightsSchemeDeviation);
