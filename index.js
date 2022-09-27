@@ -61,7 +61,7 @@ ctx.stroke();
 ctx.closePath();
 
 
-const n = 100; // количество шагов
+const n = 300; // количество шагов
 const h = 0.15; // длина шага
 const y0 = 41; // начальное значение y
 
@@ -150,9 +150,13 @@ for (let key in appData.weightsScheme) {
 
 
 // погрешность
-let deviation = 0;
 let resObjArr = []; // аналитическое
+let explicitSchemeDeviation = 0;
 let explicitSchemeArr = []; // Явная схема
+let implicitSchemeDeviation = 0;
+let implicitSchemeArr = []; // Неявная схема
+let weightsSchemeDeviation = 0;
+let weightsSchemeArr = []; // Схема с весами
 
 // аналитическое
 for (let key in appData.resObj) {
@@ -160,20 +164,51 @@ for (let key in appData.resObj) {
       resObjArr.push(appData.resObj[key]);
    }
 }
-console.dir(resObjArr);
 
+// Явная схема
+for (let key in appData.explicitScheme) {
+   if (appData.explicitScheme.hasOwnProperty(key)) {
+      explicitSchemeArr.push(appData.explicitScheme[key]);
+   }
+}
+
+// Неявная схема
+for (let key in appData.implicitScheme) {
+   if (appData.implicitScheme.hasOwnProperty(key)) {
+      implicitSchemeArr.push(appData.implicitScheme[key]);
+   }
+}
+
+// Схема с весами
+for (let key in appData.weightsScheme) {
+   if (appData.weightsScheme.hasOwnProperty(key)) {
+      weightsSchemeArr.push(appData.weightsScheme[key]);
+   }
+}
 
 // погрешность явной схемы
 for (let i = 0; i < n; i++) {
-   // deviation += Math.abs();
+   explicitSchemeDeviation += Math.abs(resObjArr[i] - explicitSchemeArr[i]) / resObjArr[i];
 }
+explicitSchemeDeviation /= n;
+explicitSchemeDeviation *= 100;
+explicitSchemeDeviation = explicitSchemeDeviation.toFixed(1);
+console.log('Явная схема:', explicitSchemeDeviation);
 
-/* double pogr = 0;
-double[] orig = Original(); // аналитическое
-double[] mas = First(); // Явная схема
-for (int i = 0; i < N; i++) {
-   pogr += Math.Abs(orig[i] - mas[i]) / orig[i];
+// погрешность неявной схемы
+for (let i = 0; i < n; i++) {
+   implicitSchemeDeviation += Math.abs(resObjArr[i] - implicitSchemeArr[i]) / resObjArr[i];
 }
-pogr /= N;
-pogr *= 100;
-pogr = Math.Round(pogr,1); */
+implicitSchemeDeviation /= n;
+implicitSchemeDeviation *= 100;
+implicitSchemeDeviation = implicitSchemeDeviation.toFixed(1);
+console.log('Явная схема:', implicitSchemeDeviation);
+
+// погрешность схемы весов
+for (let i = 0; i < n; i++) {
+   weightsSchemeDeviation += Math.abs(resObjArr[i] - weightsSchemeArr[i]) / resObjArr[i];
+}
+weightsSchemeDeviation /= n;
+weightsSchemeDeviation *= 100;
+weightsSchemeDeviation = weightsSchemeDeviation.toFixed(1);
+console.log('Явная схема:', weightsSchemeDeviation);
