@@ -80,8 +80,8 @@ ctx.closePath(); // заканчиваем рисование
 ctx.beginPath();
 ctx.strokeStyle = '#000000';
 
-ctx.moveTo(xAxis, 0);
-ctx.lineTo(xAxis, canvasPlotHeigth);
+ctx.moveTo(xAxis, 0); // старт
+ctx.lineTo(xAxis, canvasPlotHeigth); // конец куда идет линия
 ctx.fillText('y', xAxis - shiftAxisNames, 0);
 
 ctx.moveTo(0, yAxis);
